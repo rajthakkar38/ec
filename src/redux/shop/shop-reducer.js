@@ -1,14 +1,17 @@
-import ShopData from "./shopdata.js";
-
-const Initial_State = {
-  Shop_Data: ShopData,
+const INITIAL_STATE = {
+  collections: null,
 };
 
-const shopRedux = (state = Initial_State, action) => {
+const shopReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case "Update":
+      return {
+        ...state,
+        collections: action.payload,
+      };
     default:
       return state;
   }
 };
 
-export default shopRedux;
+export default shopReducer;

@@ -9,6 +9,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user-action";
 import Checkout from "./pages/checkout/checkout-component.jsx";
+import { selectCollectionsForPreview } from "./redux/shop/shop-selector";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "./redux/user/user-selector";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -55,9 +58,14 @@ class App extends React.Component {
   }
 }
 
-const fun1 = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser,
-  hidden,
+// const fun1 = ({ user: { currentUser }, cart: { hidden } }) => ({
+//   currentUser,
+//   hidden,
+// });
+
+const fun1 = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  arr: selectCollectionsForPreview,
 });
 
 const fun = (dispatch) => ({

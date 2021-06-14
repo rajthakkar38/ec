@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import CollectionItems from "../collection-items/collection-items.component";
 
 const Collection = ({ match, collections }) => {
-  console.log(collections);
   const { title, items } = collections;
 
   return (
