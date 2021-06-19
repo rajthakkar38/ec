@@ -2,12 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assests/logo.svg";
 import "./header.component.scss";
-import { auth } from "../../firebase/firebase.utils";
+
 import { connect } from "react-redux";
 import CartIcon from "../cart-icon/cart-icon";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+import { SignOutStart } from "../../redux/user/user-action";
 
-const Header = ({ currentUser, hidden }) => {
+const Header = ({ currentUser, hidden, SignOutStart }) => {
   return (
     <div className="header">
       <Link to="/" className="Logo-container">
@@ -24,7 +25,7 @@ const Header = ({ currentUser, hidden }) => {
           <div
             className="option"
             onClick={() => {
-              auth.signOut();
+              SignOutStart();
             }}
           >
             Sign Out
@@ -46,4 +47,8 @@ const fun1 = ({ user: { currentUser }, cart: { hidden } }) => ({
   hidden,
 });
 
-export default connect(fun1)(Header);
+const fun = (dispatch) => ({
+  SignOutStart: () => dispatch(SignOutStart()),
+});
+
+export default connect(fun1, fun)(Header);
